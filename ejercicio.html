@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github</title>
+
+    <style>
+        #contenedor >*{
+            margin: auto;
+            margin-bottom: 10px;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio ColorList</h1>
+    <div id="contenedor"></div>
+
+    <script>
+
+        function agregarItem(item){
+            const itemHTML = `
+            <div style = "border:1px solid ${item.color} ;">
+            <h3>Nombre Color: ${item.name}</h3>
+            <p style="background: ${item.color}"> Codigo: ${item.color}</p>
+            </div>
+            `
+            const contenedor = document.querySelector("#contenedor");
+            contenedor.innerHTML+= itemHTML;
+        }
+
+
+        function listaColoresFetch(){
+            url = "https://reqres.in/api/data";
+            fetch(url)
+            .then((respuesta) => respuesta.json())
+            .then(respuesta =>{
+                for(let i = 0; i< respuesta.data.length;i++){
+                    console.log(respuesta.data[i]);
+                    agregarItem(respuesta.data[i]);
+                }
+            })
+        }
+
+        listaColoresFetch();
+    </script>
+</body>
+</html>
